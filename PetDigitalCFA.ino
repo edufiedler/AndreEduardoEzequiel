@@ -1,5 +1,6 @@
 #include "petDigitalServer.h"
 #include "petDigitalMotionTracker.h"
+#include "petDigitalTempSensors.h"
 
 // apenas para DOIT ESP32 DEVKIT V1
 static const uint8_t LED_BUILTIN = 2;
@@ -19,6 +20,7 @@ void setup()
   initTime();
   initWebServer();
   initMPU9250();
+  initTempSensors();
   start = millis();
 }
 
@@ -33,6 +35,7 @@ void loop()
     start = millis();
     printLocalTime();
     statusMPU9250();
+    statusTempSensors();
   }
   
 }
