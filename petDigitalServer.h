@@ -1,14 +1,24 @@
-#include <WebServer.h>
-#include <ESPmDNS.h>
-
 #include <WiFi.h>
 #include <WiFiClient.h>
-
+#include <WebServer.h>
+#include <ESPmDNS.h>
 #include <time.h>
 #include <esp_sntp.h>
 
+#include <FS.h>
+#define FILESYSTEM SPIFFS
+// You only need to format the filesystem once
+#define FORMAT_FILESYSTEM false
+
+#if FILESYSTEM == FFat
+#include <FFat.h>
+#endif
+#if FILESYSTEM == SPIFFS
 #include <SPIFFS.h>
-// #include <FS.h>
+#endif
+#if FILESYSTEM == LittleFS
+#include <LittleFS.h>
+#endif
 
 extern WebServer server;
 extern File fsUploadFile;
@@ -24,9 +34,6 @@ void handleFileList();
 const long gmtOffset_sec = -3 * 3600;    // -3 horas Brasília
 const int daylightOffset_sec = 0 * 3600; // sem horário de verão = 0
 extern tm timeinfo;
-
-// You only need to format the filesystem once
-#define FORMAT_FILESYSTEM false
 
 void initFileSystem();
 void initWiFi();

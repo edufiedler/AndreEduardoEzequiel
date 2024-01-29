@@ -64,12 +64,10 @@ void statusTempSensors()
         if (sensors.getAddress(tempDeviceAddress, i))
         {
             // Output the device ID
-            Serial.print("Temperature for device: ");
-            Serial.println(i, DEC);
+            Serial.printf("Temperature for device %d:", i);
             // Print the data
             float tempC = sensors.getTempC(tempDeviceAddress);
-            Serial.print("Temp C: ");
-            Serial.print(tempC);
+            Serial.printf("Temp C: %f\n", tempC);
         }
     }
 }

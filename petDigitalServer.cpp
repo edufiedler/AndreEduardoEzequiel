@@ -10,7 +10,13 @@ File fsUploadFile;
 possíveis servidores NTP (máx 3):
 {"pool.ntp.org","0.pool.ntp.org","1.pool.ntp.org","2.pool.ntp.org","3.pool.ntp.org",
 "pool.ntp.br","time.nist.gov","br.pool.ntp.org","a.st1.ntp.br","b.st1.ntp.br","c.st1.ntp.br",}
+*/
+const char *ntpServers[3] = {
+    "time.nist.gov",
+    "pool.ntp.org",
+    "pool.ntp.br"};
 
+/*
 Serial.println(&timeinfo, "%Y-%m-%d %H:%M:%S")
 %A - dia da semana, textual, completo (Sunday - Saturday)
 %B - mês, textual, completo (January - December)
@@ -40,15 +46,9 @@ struct tm
 #endif
 };
 */
-
 struct tm timeinfo;
 
 const char *host = "petdigitalcfa";
-
-const char *ntpServers[3] = {
-    "time.nist.gov",
-    "pool.ntp.org",
-    "pool.ntp.br"};
 
 String formatBytes(size_t bytes)
 {
@@ -130,7 +130,7 @@ String getContentType(String filename)
 bool exists(String path)
 {
   bool yes = false;
-  File file = SPIFFS.open(path, "r");
+  File file = FILESYSTEM.open(path, "r");
   if (!file.isDirectory())
   {
     yes = true;
@@ -154,7 +154,7 @@ bool handleFileRead(String path)
     {
       path += ".gz";
     }
-    File file = SPIFFS.open(path, "r");
+    File file = FILESYSTEM.open(path, "r");
     server.streamFile(file, contentType);
     file.close();
     return true;
@@ -178,7 +178,7 @@ void handleFileUpload()
     }
     Serial.print("handleFileUpload Name: ");
     Serial.println(filename);
-    fsUploadFile = SPIFFS.open(filename, "w");
+    fsUploadFile = FILESYSTEM.open(filename, "w");
     filename = String();
   }
   else if (upload.status == UPLOAD_FILE_WRITE)
@@ -216,7 +216,7 @@ void handleFileDelete()
   {
     return server.send(404, "text/plain", "FileNotFound");
   }
-  SPIFFS.remove(path);
+  FILESYSTEM.remove(path);
   server.send(200, "text/plain", "");
   path = String();
 }
@@ -237,7 +237,7 @@ void handleFileCreate()
   {
     return server.send(500, "text/plain", "FILE EXISTS");
   }
-  File file = SPIFFS.open(path, "w");
+  File file = FILESYSTEM.open(path, "w");
   if (file)
   {
     file.close();
@@ -261,7 +261,7 @@ void handleFileList()
   String path = server.arg("dir");
   Serial.println("handleFileList: " + path);
 
-  File root = SPIFFS.open(path);
+  File root = FILESYSTEM.open(path);
   path = String();
 
   String output = "[";
@@ -288,11 +288,11 @@ void handleFileList()
 
 void initFileSystem()
 {
+  FILESYSTEM.begin();
   if (FORMAT_FILESYSTEM)
-    SPIFFS.format();
-  SPIFFS.begin();
+    FILESYSTEM.format();
   {
-    File root = SPIFFS.open("/");
+    File root = FILESYSTEM.open("/");
     File file = root.openNextFile();
     while (file)
     {
@@ -331,7 +331,7 @@ void printLocalTime()
     Serial.println("Failed to obtain time");
     return;
   }
-  Serial.println(&timeinfo, "%Y-%m-%d %H:%M:%S");
+  Serial.println(&timeinfo, "%Y-%m-%d_%H:%M:%S");
 }
 
 void initTime()
@@ -343,9 +343,7 @@ void initTime()
 void initWebServer()
 {
   MDNS.begin(host);
-  Serial.print("Open http://");
-  Serial.print(host);
-  Serial.println(".local/edit to see the file browser");
+  Serial.printf("Open http://%s.local/edit to see the file browser\n", host);
   // list directory
   server.on("/list", HTTP_GET, handleFileList);
   // load editor

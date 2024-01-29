@@ -1,3 +1,5 @@
-senhadowifidecasa.h
+.clang-format
+.editorconfig
 .vscode/
 build/
+senhadowifidecasa.h
