@@ -12,6 +12,8 @@ void initPulseSensor()
     pulseSensor.pause();
     statusPulseSensor();
     digitalWrite(PULSE_OUTPUT_PIN, LOW);
+    digitalWrite(PULSE_BLINK[0], LOW);
+    digitalWrite(PULSE_BLINK[1], LOW);    
 }
 
 int statusPulseSensor()
@@ -56,7 +58,7 @@ int statusPulseSensor()
 
         for (int i = 0; i < MAX_BPM_SAMPLE; i++)
         {
-            if (bpmSample[i] >= bpmSample[(i + 1) % MAX_BPM_SAMPLE] + 2 || bpmSample[i] <= bpmSample[(i + 1) % MAX_BPM_SAMPLE] - 2)
+            if (bpmSample[i] >= bpmSample[(i + 1) % MAX_BPM_SAMPLE] + 2 || bpmSample[i] <= bpmSample[(i + 1) % MAX_BPM_SAMPLE] - 2 || bpmSample[i] <= 30)
             {
                 finalBPM = 0;
                 break;
@@ -68,7 +70,7 @@ int statusPulseSensor()
             finalBPM /= MAX_BPM_SAMPLE;
         }
 
-        delay(20);
+        delay(100);
     }
 
     return finalBPM;
