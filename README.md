@@ -42,7 +42,7 @@ O brinquedo funciona de forma offline e salva todos os eventos para envio para o
 ## Montagem (com fotos)
 + Ezequiel irá desenvolver este capítulo
 
-## Operação (como usar) - Funcionamento do brinquedo
+## Operação - Funcionamento do brinquedo
 
 1. Lúdico (interação criança - tamagotchi):
 
@@ -59,8 +59,15 @@ Ao ligar o brinquedo, o brinquedo solicita a medição dos batimentos cardíacos
 
 ## Histórico e método de desenvolvimento (Requisitos do projeto)
 
-O projeto foi se desenvolvendo por etapas, sendo a primeira etapa conseguir entender o funcionamento de cada sensor individualmente 
-
-4. Rede: (Especificações ...)
-+ As informações do tamagotchi serão enviadas para o telegram dos pais em lote a cada 2 horas, no desligamento do brinquedo e quando o brinquedo é ligado, caso existam informações armazenadas no brinquedo. Após o envio, as informações são apagadas do brinquedo, exceto as situações de risco.
-+ As situações de risco serão enviadas para o telegram dos pais assim que detectadas.
+O projeto foi se desenvolvendo em etapas, conforme abaixo:
+- Entender o funcionamento do ESP32;
+- Instalar uma IDE para programação do ESP32;
+- Implementar uma lógica para captar a temperatura do ambiente a cada segundo;
+- Implementar o sensor de batimentos cardíacos e ler na tela do computador;
+- Testar a implementação de um botão digital, a ser utilizado na disponibilização de comida e de água;
+- Implementar o acelerômetro;
+- Apresentar expressões na tela do OLED SSD1306;
+- Testar o acendimento do led para utilização como os olhos do tamagotchi.
+- Desenvolvimento do protótico;
+- Integração dos sensores no protótipo;
+- Desenvolvimento de interface web para acessar o log de utilização do tamagotchi pela criança. Esta interface utiliza a rede wi-fi.
