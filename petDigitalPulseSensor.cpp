@@ -10,7 +10,6 @@ void initPulseSensor()
     pulseSensor.analogInput(PULSE_INPUT_PIN);
     pulseSensor.setSerial(Serial);
     pulseSensor.pause();
-    statusPulseSensor();
     digitalWrite(PULSE_OUTPUT_PIN, LOW);
     digitalWrite(PULSE_BLINK[0], LOW);
     digitalWrite(PULSE_BLINK[1], LOW);    
@@ -18,8 +17,8 @@ void initPulseSensor()
 
 int statusPulseSensor()
 {
+    digitalWrite(PULSE_OUTPUT_PIN, HIGH);
     pulseSensor.resume();
-
     int ledIndex = 0;
     int Signal[MAX_SIGNAL_SAMPLE];
     int signalIndex = 0;
@@ -73,5 +72,6 @@ int statusPulseSensor()
         delay(100);
     }
 
+    digitalWrite(PULSE_OUTPUT_PIN, LOW);
     return finalBPM;
 }

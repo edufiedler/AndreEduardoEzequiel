@@ -18,6 +18,7 @@ void printAddress(DeviceAddress deviceAddress)
             Serial.print("0");
         Serial.print(deviceAddress[i], HEX);
     }
+    Serial.println();
 }
 
 void initTempSensors()
@@ -53,8 +54,9 @@ void initTempSensors()
     }
 }
 
-void statusTempSensors()
+String statusTempSensors()
 {
+    String log;
     sensors.requestTemperatures(); // Send the command to get temperatures
 
     // Loop through each device, print out temperature data
@@ -63,11 +65,18 @@ void statusTempSensors()
         // Search the wire for address
         if (sensors.getAddress(tempDeviceAddress, i))
         {
+            float tempC = sensors.getTempC(tempDeviceAddress);
+            
             // Output the device ID
             Serial.printf("Temperature for device %d:", i);
-            // Print the data
-            float tempC = sensors.getTempC(tempDeviceAddress);
             Serial.printf("Temp C: %f\n", tempC);
+            printAddress(tempDeviceAddress);
+            Serial.println();
+            log = "Temperature for device " + i;
+            log += ": ";
+            log += tempC;
+            log += "\n";
         }
     }
+    return log;
 }
