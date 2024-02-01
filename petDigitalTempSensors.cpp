@@ -85,7 +85,7 @@ float getTempExternal(){
   // Le a temperatura do sensor externo, converte-a para escala Celsius, retorna o valor e imprime no Serial
   sensors.requestTemperatures(); 
   DeviceAddress tempDeviceAddress;
-  sensors.getAddress(tempDeviceAddress, 0);
+  sensors.getAddress(tempDeviceAddress, 1);
   float tempC = sensors.getTempC(tempDeviceAddress);
   return tempC;
 }

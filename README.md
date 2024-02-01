@@ -23,8 +23,8 @@ O brinquedo funciona de forma offline e salva todos os eventos para envio para o
 + 1 Sensor de batimento cardíaco;
 + 2 sensores de temperatura (um para a parte lúdica e outro para aviso aos pais);
 + 2 botões digitais (um de alimentação e um de água);
-+ 1 acelerômetro (Placa MPU-9250 de Acelerômetro e Giroscópio 3 eixos);
-+ 1 tela (Tela OLED SSD1306 (128px 64px));
++ Placa MPU-9250 de Acelerômetro e Giroscópio 3 eixos;
++ Tela OLED SSD1306 (128px 64px);
 + 2 leds;
 + 1 caixa para o protótipo;
 + ESP32;
