@@ -5,6 +5,7 @@ const int oneWireBus = GPIO_NUM_33; // de GPIO_NUM_34 até GPIO_NUM_39 apenas In
 
 void initTempSensors();
 String statusTempSensors();
+float getTempExternal();
 
 extern OneWire oneWire;
 extern DallasTemperature sensors;

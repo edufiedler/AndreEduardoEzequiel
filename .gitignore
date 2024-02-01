@@ -3,3 +3,4 @@
 .vscode/
 build/
 senhadowifidecasa.h
+esp32fs.jar
