@@ -31,7 +31,7 @@ void displayStatus(int time, struct Tamagotchi state){
   // Define se feliz ou triste a partir dos atributos fome ou sede
   display.clear();
 
-  if(state.qntfome > minAtributo && state.qntsede > minAtributo && state.efeitoAdverso){
+  if(state.qntfome > minAtributo && state.qntsede > minAtributo && !state.efeitoAdverso){
      display.drawXbm(32,0,96,64, feliz_bits);
   }else{
     display.drawXbm(32,0,96,64, triste_bits);
@@ -43,14 +43,17 @@ void displayStatus(int time, struct Tamagotchi state){
   String statusFome = "F: ";
   String statusSede = "S: ";
   String statusTemp = "T: ";
+  String statusEfeito = "E: ";
 
   statusFome += state.qntfome;
   statusSede += state.qntsede;
   statusTemp += static_cast<int>(getTempExternal());
+  statusEfeito += state.efeitoAdverso;
 
   display.drawStringMaxWidth(5, 5, 32, statusFome);
   display.drawStringMaxWidth(5, (5 + tamanhoFonte + 1), 32, statusSede);
   display.drawStringMaxWidth(5, (5 + (2 * tamanhoFonte) + 2), 32, statusTemp);
+  display.drawStringMaxWidth(5, (5 + (3 * tamanhoFonte) + 3), 32, statusEfeito);
 
   display.display();
   delay(time);
