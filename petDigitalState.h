@@ -106,7 +106,7 @@ void calor()
   float tempAlvo = tempAlvo - 1;
   state.efeitoAdverso = 'C';
 
-  while (tempAlvo < tempAtual)
+  while (tempAtual > tempAlvo)
   {
     displayStatus(2000, state);
     tempAtual = getTempExternal();
