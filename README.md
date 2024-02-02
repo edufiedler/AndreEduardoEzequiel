@@ -64,7 +64,7 @@ O resistor de 200 Ohms está ligado ao GN e aos dois leds verdes (olhos). Os led
 
 O sensor de batimentos cardíacos possui 3 pinos:
 + negativo;
-+ positivo (saindo do meio do sensor) está ligado ao GPIO 16 em vez do VCC pois podemos programar o ligar/desligar;
++ positivo
 + de dados está ligado ao GPIO 36;
 
 O acelerômetro (MPU 9250) e a Tela Oled possuem ambos 4 pinos:
@@ -124,12 +124,11 @@ O projeto foi se desenvolvendo em etapas, conforme abaixo:
 4. Fazer o upload do código compilado;
 5. Acessar através do browser o endereço petdigitalcfa.local/edit o qual irá mostrar os logs.
 6. Caso apareça uma página em branco as possíveis soluções são:
-    1. Excluir o arquivo partitions.csv e refazer o upload do código;
-    2. No terminal Linux entrar na pasta 'data' e executar o seguinte comando:
+    1. No terminal Linux entrar na pasta 'data' e executar o seguinte comando:
         ```
         for file in `ls -A1`; do curl -F "file=@$PWD/$file" petdigitalcfa.local/edit; done
         ```
-    3. Utilizar a ferramenta esp32fs em https://github.com/lorol/arduino-esp32fs-plugin
+    2. Utilizar a ferramenta esp32fs em https://github.com/lorol/arduino-esp32fs-plugin
         1. esta ferramente funciona apenas no Arduino IDE 1.8.x (legado)
         2. baixe o arquivo .zip e desempacote-o no caminho (Linux): $HOME/Arduino/tools/ESP32FS/tool/
         3. Abra a sketch na IDE 1.8.x
