@@ -15,6 +15,14 @@ long interval = 10;
 File logFile;
 String logFilePath;
 
+bool logFileAppendMessage (String msg){
+  logFile = FILESYSTEM.open(logFilePath, FILE_APPEND);
+  logFile.print(getLocalTimeString() + " " + msg);
+  logFile.close();
+  return true;
+}
+
+
 void setup()
 {
   Serial.begin(115200);
@@ -33,12 +41,8 @@ void setup()
   before = start;
   Serial.println(getLocalTimeString());
   logFilePath = "/" + getLocalTimeString() + ".txt";
-  logFile = FILESYSTEM.open(logFilePath, FILE_APPEND);
-  logFile.print(getLocalTimeString() + " " + statusTempSensors());
-  logFile.print(getLocalTimeString() + " " + statusPulseSensor());
-  logFile.close();
-
-  
+  logFileAppendMessage(statusTempSensors());
+  logFileAppendMessage(statusPulseSensor());
 }
 
 long int i = 0;
