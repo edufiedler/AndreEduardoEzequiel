@@ -51,11 +51,15 @@ Utilizamos uma caixa de embalagem de produto eletrônicos pois possuí:
 + resistência do material;
 + simples de cortar;
 
+![Placa ESP32 e Protoboards](images/01_fundo_componentes.jpeg) 
+
 Usamos 1,5 protoboards (uma delas cortado ao meio) para:
 1. fixar o esp32 no fundo da caixa aproveitando-se do fato de que as protoboards já vieram com adesivo;
 2. melhor aproveitar os 30 pinos (15 pinos de cada lado) disponibilizados pela placa de desenvolvimento DOIT DEVKIT V1;
 3. 9 pinos são inutilizados pelo fato de usarmos WiFi (não está claro da documentação do esp32 por que o uso do WiFi/Bluetooth desabilita os pinos associados ao ADC2);
 4. 16 pinos estarão disponíveis para os componentes dos quais 4 são de apenas de entrada (input), ou seja, estes 4 não poderão ser usados para componentes que necessitem de comunicação bidirecional.
+
+![Tampa com LEDs, Leitor de Batimentos Cardíacos, Tela OLED e LEDS](images/02_tampa_componentes.jpeg)
 
 O resistor de 10 kOhms foi ligado ao fio/pino de dados (DQ - dados bidirecionais) dos sensores de temperatura (ds18b20) e ao VCC para estabelecer um PULLUP no pino GPIO 33 , ou seja, de um lado do resistor temos GPIO 33 e os dois DQ e do outro lado o VCC.
 Além do DQ cada um dos sensores possui um fio/pino negativo e um fio/pino positivo.
@@ -81,6 +85,8 @@ Os dois botões capacitivos possuem 3 pinos:
 
 O esp32 receberá a energia através de sua entrada USB de uma bateria.
 
+![Protótipo montado](images/04_tampa_coberta.jpeg) 
+ 
 ## Operação - Funcionamento do brinquedo
 
 1. Lúdico (interação criança - tamagotchi):
