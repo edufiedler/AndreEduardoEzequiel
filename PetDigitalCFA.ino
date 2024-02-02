@@ -20,11 +20,12 @@ void setup()
   Serial.begin(115200);
   Serial.setDebugOutput(true);
   Serial.println();
+
   initWiFi();
   initTime();
   initFileSystem();
   initWebServer();
-  
+
   initState();
   statusMPU9250();
   start = time(&now);
@@ -48,9 +49,9 @@ void loop()
     start = time(&now);
   }
 
-  if(now - before > interval){
+  if (now - before > interval)
+  {
     before = now;
     randomState();
   }
-
 }

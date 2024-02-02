@@ -2,7 +2,6 @@
 #include "SSD1306Wire.h" 
 #include "string.h"
 #include "expressoes.h"
-#include <OneWire.h>
 #include "tamagotchi.h"
 
 const int tamanhoFonte = 10;

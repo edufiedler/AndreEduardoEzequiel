@@ -40,7 +40,46 @@ O brinquedo funciona de forma offline e salva todos os eventos para envio para o
 + Autocad.
 
 ## Montagem (com fotos)
-+ Ezequiel irá desenvolver este capítulo
+Nota1: Usaremos a numeração dos pinos de acordo com o GPIO correspondente e que não batem com a ordem em que os pinos são distribuídos fisicamente nas placas de desenvolvimento.
+Nota2: Usaremos o termo GPIO mesmo que o pino esteja sendo usado para outros fins como , por exemplo, iremos designar o pino correspondente ao Touch 9 como GPIO 32 que é como ele está organizado na placa DOIT DEVKIT V1.
+Nota3: GN e VCC referem-se respectivamente a um dos dois pinos GN e o pino VCC do esp32 e as trilhas da protoboards e/ou jumpers ligados a eles.
+Nota4: A menos que seja explicitamente dito considere que os pinos positivos estejam ligados ao VCC e os pinos negativos ao GN.
+Utilizamos uma caixa de embalagem de produto eletrônicos pois possuí:
++ espaço suficiente para os fios e sensores;
++ paredes espessas bem rígidas para o transporte do esp32, sensores e fios;
++ levaza do material;
++ resistência do material;
++ simples de cortar;
+
+Usamos 1,5 protoboards (uma delas cortado ao meio) para:
+1. fixar o esp32 no fundo da caixa aproveitando-se do fato de que as protoboards já vieram com adesivo;
+2. melhor aproveitar os 30 pinos (15 pinos de cada lado) disponibilizados pela placa de desenvolvimento DOIT DEVKIT V1;
+3. 9 pinos são inutilizados pelo fato de usarmos WiFi (não está claro da documentação do esp32 por que o uso do WiFi/Bluetooth desabilita os pinos associados ao ADC2);
+4. 16 pinos estarão disponíveis para os componentes dos quais 4 são de apenas de entrada (input), ou seja, estes 4 não poderão ser usados para componentes que necessitem de comunicação bidirecional.
+
+O resistor de 10 kOhms foi ligado ao fio/pino de dados (DQ - dados bidirecionais) dos sensores de temperatura (ds18b20) e ao VCC para estabelecer um PULLUP no pino GPIO 33 , ou seja, de um lado do resistor temos GPIO 33 e os dois DQ e do outro lado o VCC.
+Além do DQ cada um dos sensores possui um fio/pino negativo e um fio/pino positivo.
+
+O resistor de 200 Ohms está ligado ao GN e aos dois leds verdes (olhos). Os leds estão ligados aos pinos GPIO 32 e GPIO 23.
+
+O sensor de batimentos cardíacos possui 3 pinos:
++ negativo;
++ positivo (saindo do meio do sensor) está ligado ao GPIO 16 em vez do VCC pois podemos programar o ligar/desligar;
++ de dados está ligado ao GPIO 36;
+
+O acelerômetro (MPU 9250) e a Tela Oled possuem ambos 4 pinos:
++ negativo;
++ positivo;
++ SDA ambos ligados ao GPIO 21;
++ SCL ambos ligados ao GPIO 22;
++ Ambos os sensores podem compartilhar os pinos graças ao protocolo I2C (lê-se eye-squared-see);
+
+Os dois botões capacitivos possuem 3 pinos:
++ negativo
++ positovo
++ sinal digital ligados ao GPIO 39 e GPIO 34
+
+O esp32 receberá a energia através de sua entrada USB de uma bateria.
 
 ## Operação - Funcionamento do brinquedo
 
