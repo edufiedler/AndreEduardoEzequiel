@@ -4,21 +4,31 @@ PulseSensorPlayground pulseSensor;
 
 void initPulseSensor()
 {
-    pinMode(PULSE_OUTPUT_PIN, OUTPUT);
-    digitalWrite(PULSE_OUTPUT_PIN, HIGH);
     pulseSensor.begin();
     pulseSensor.analogInput(PULSE_INPUT_PIN);
     pulseSensor.setSerial(Serial);
-    pulseSensor.pause();
-    digitalWrite(PULSE_OUTPUT_PIN, LOW);
-    digitalWrite(PULSE_BLINK[0], LOW);
-    digitalWrite(PULSE_BLINK[1], LOW);    
 }
 
-int statusPulseSensor()
+String statusPulseSensor()
 {
-    digitalWrite(PULSE_OUTPUT_PIN, HIGH);
-    pulseSensor.resume();
+    String log;
+    log = "BPM: ";
+    log += getBPMPulseSensor();
+    log += "\n";
+    return log;
+}
+
+String statusPulseSensor(int bpm)
+{
+    String log;
+    log = "BPM: ";
+    log += bpm;
+    log += "\n";
+    return log;
+}
+
+int getBPMPulseSensor()
+{
     int ledIndex = 0;
     int Signal[MAX_SIGNAL_SAMPLE];
     int signalIndex = 0;
@@ -31,7 +41,6 @@ int statusPulseSensor()
     while (!finalBPM)
     {
         Signal[signalIndex] = analogRead(PULSE_INPUT_PIN);
-        Serial.println(Signal[signalIndex]);
         signalArraySize = (signalIndex > signalArraySize) ? signalIndex : signalArraySize;
 
         for (int i = 0; i < MAX_SIGNAL_SAMPLE; i++)
@@ -71,7 +80,5 @@ int statusPulseSensor()
 
         delay(100);
     }
-
-    digitalWrite(PULSE_OUTPUT_PIN, LOW);
     return finalBPM;
 }
