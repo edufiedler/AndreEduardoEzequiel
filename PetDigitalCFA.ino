@@ -10,7 +10,7 @@ static const uint8_t LED_BUILTIN = 2;
 long now;
 long start;
 long before;
-long interval = 2;
+long interval = 10;
 
 File logFile;
 String logFilePath;
@@ -27,6 +27,7 @@ void setup()
   initWebServer();
 
   initState();
+  
   statusMPU9250();
   start = time(&now);
   before = start;
@@ -34,6 +35,10 @@ void setup()
   logFilePath = "/" + getLocalTimeString() + ".txt";
   logFile = FILESYSTEM.open(logFilePath, FILE_APPEND);
   logFile.print(getLocalTimeString() + " " + statusTempSensors());
+  logFile.print(getLocalTimeString() + " " + statusPulseSensor());
+  logFile.close();
+
+  
 }
 
 long int i = 0;
@@ -41,9 +46,9 @@ long int i = 0;
 void loop()
 {
   server.handleClient();
-  delay(20); // allow the cpu to switch to other tasks
+  delay(100); // se o servidor não responder aumente o valor do delay
   time(&now);
-  if (now - start >= 60 * 15) // 15 minutos
+  if (now - start >= 5)
   {
     Serial.println(getLocalTimeString());
     start = time(&now);
