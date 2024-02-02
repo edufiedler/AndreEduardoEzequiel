@@ -110,3 +110,35 @@ O projeto foi se desenvolvendo em etapas, conforme abaixo:
 - Desenvolvimento do protótico;
 - Integração dos sensores no protótipo;
 - Desenvolvimento de interface web para acessar o log de utilização do tamagotchi pela criança. Esta interface utiliza a rede wi-fi.
+
+## Detalhes de Implementação
+### passos para a primeira execução
+
+1. Primeiramente deverá ser criado uma arquivo chamado senhadowifidecasa.h que deverá ser preenchido com o conteúdo:
+    ```
+    const char *ssid = "Nome do WiFi";
+    const char *password = "Senha do WiFI";
+    ```
+2. Deverá ser selecionado a placa ESP32 Dev Module (esp32);
+3. Em 'partition scheme' deverá ser selecionado 'No OTA (2MB APP/2MB SPIFFS);
+4. Fazer o upload do código compilado;
+5. Acessar através do browser o endereço petdigitalcfa.local/edit o qual irá mostrar os logs.
+6. Caso apareça uma página em branco as possíveis soluções são:
+    1. Excluir o arquivo partitions.csv e refazer o upload do código;
+    2. No terminal Linux entrar na pasta 'data' e executar o seguinte comando:
+        ```
+        for file in `ls -A1`; do curl -F "file=@$PWD/$file" petdigitalcfa.local/edit; done
+        ```
+    3. Utilizar a ferramenta esp32fs em https://github.com/lorol/arduino-esp32fs-plugin
+        1. esta ferramente funciona apenas no Arduino IDE 1.8.x (legado)
+        2. baixe o arquivo .zip e desempacote-o no caminho (Linux): $HOME/Arduino/tools/ESP32FS/tool/
+        3. Abra a sketch na IDE 1.8.x
+        4. No menu Ferramentas (Tools) procure por ESP32 Sketch Data Upload
+        5. Escolha SPIFFS
+
+Nota: Aparentemente SPIFFS foi descontinuado o que o tornará obsoleto dando lugar ao seu sucessor LittleFS.
+
+### Algumas recomendações para futuros alunos
+
+1. Se for utilizar o Arduino IDE recomendo que aprendam C++ que é a linguagem usada no compilador;
+2. Apesar de o Arduino IDE ser mais amigável para iniciantes do esp32 recomendo que usem extensões do Visual Studio Code como o ESP-IDF ou o PlatformIO e incluam o Arduino Core em seu projetos para assim utilizar tanto as funções quanto as bibliotecas do Arduino no esp32.
