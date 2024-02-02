@@ -94,7 +94,7 @@ Ao ligar o brinquedo, o brinquedo solicita a medição dos batimentos cardíacos
 + Sentir tédio: criança movimenta o acelerômetro para entreter o tamagotchi
 
 2. (Não implementado) Monitoramento do ambiente para os pais (interação ambiente -> criança -> pais):
-+ Temperatura alta/baixa, umidade alta/baixa, batimento cardíaco baixo/alto => aviso aos pais utiliando o wi-fi para verificar o ambiente da criança. Adicionalmente, para o brinquedo e mostra na tela do brinquedo um sinal para a criança procurar os pais em conjunto com um sinal sonoro.
++ Temperatura alta/baixa, umidade alta/baixa, batimento cardíaco baixo/alto => aviso aos pais utilizando o wi-fi para verificar o ambiente da criança. Adicionalmente, para o brinquedo e mostra na tela do brinquedo um sinal para a criança procurar os pais em conjunto com um sinal sonoro.
 
 ## Histórico e método de desenvolvimento (Requisitos do projeto)
 
