@@ -67,7 +67,7 @@ void displayText(String text){
   display.clear();
 
   // Texto
-  display.setFont(ArialMT_Plain_24);
+  display.setFont(ArialMT_Plain_16);
   display.setTextAlignment(TEXT_ALIGN_LEFT);
 
   display.drawStringMaxWidth(10, 20, 128, text);
